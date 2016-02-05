@@ -1,0 +1,24 @@
+{
+  "name": "expensetracker",
+  "version": "1.0.0",
+  "description": "template project for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set NODE_ENV=dev && node server"
+  },
+  "author": "Anand Mohan",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "hapi": "^13.0.0",
+    "inert": "^3.2.0",
+    "jsonwebtoken": "^5.5.4",
+    "nconf": "^0.8.4",
+    "vision": "^4.0.1"
+  },
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "gulp": "^3.9.0"
+  }
+}
