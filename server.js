@@ -39,6 +39,15 @@ server.register(require('vision'), (err) => {
     });
 });
 
+//authentication
+
+server.auth.scheme("jwt", function(server, options) {
+    return {
+        authenticate : function(request, reply) {
+            reply(null, {});
+        }
+    }
+});
 
 // Start the server
 server.start((err) => {
