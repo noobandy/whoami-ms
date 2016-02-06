@@ -1,9 +1,12 @@
 var path = require("path");
-var Hapi = require("hapi");
 
+var Hapi = require("hapi");
+var jwt = require("jsonwebtoken");
+var Boom = require("boom");
 
 var config = require(path.join(__dirname, "config/config"));
 var index = require(path.join(__dirname, "routes/index"));
+var login = require(path.join(__dirname, "routes/login"));
 var resources = require(path.join(__dirname, "routes/resources"));
 
 var server = new Hapi.Server();
@@ -13,8 +16,32 @@ var connection = server.connection({
 	port : config.get("port")
 });
 
+//authentication
+server.auth.scheme("jwt", function(server, options) {
+    return {
+        authenticate : function(request, reply) {
+            var token = request.headers.authorization;
+            if(!token) {
+                reply(Boom.unauthorized("Missing token", "jwt", {}),{});
+            } else {
+                 jwt.verify(token.split(" ")[1], options.secret, {algorithm : options.algorithm}, function(err, decoded) {
+                    if(err) {
+                        return reply(Boom.unauthorized("Wrong token", "jwt", {}),{});
+                    }
+                    reply.continue({credentials : decoded.username});
+            });
+            }
+        }
+    };
+});
+
+
+server.auth.strategy("token", "jwt", false, {secret : config.get("jwtSecret"), algorithm :config.get("jwtAlgorithm")});
+
+
 //route configuration
 server.route(index);
+server.route(login);
 
 //static content
 server.register(require('inert'), (err) => {
@@ -39,15 +66,7 @@ server.register(require('vision'), (err) => {
     });
 });
 
-//authentication
 
-server.auth.scheme("jwt", function(server, options) {
-    return {
-        authenticate : function(request, reply) {
-            reply(null, {});
-        }
-    }
-});
 
 // Start the server
 server.start((err) => {
