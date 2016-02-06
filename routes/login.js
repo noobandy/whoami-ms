@@ -1,6 +1,7 @@
 var path = require("path");
 var jwt = require("jsonwebtoken");
 var Boom = require("boom");
+var Joi = require("joi");
 
 var config = require(path.join(__dirname, "../config/config"));
 
@@ -20,6 +21,15 @@ var routes = [{
 
 		} else {
 			reply(Boom.unauthorized("wrong credentials"));
+		}
+	},
+	config : {
+		auth : false,
+		validate : {
+			payload : {
+				username : Joi.string().required(),
+				password : Joi.string().required()
+			}
 		}
 	}
 }];
