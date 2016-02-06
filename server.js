@@ -12,8 +12,8 @@ var resources = require(path.join(__dirname, "routes/resources"));
 var server = new Hapi.Server();
 
 var connection = server.connection({
-	host : config.get("host"),
-	port : config.get("port")
+	host : config.get("server:host"),
+	port : config.get("server:port")
 });
 
 //authentication
@@ -36,7 +36,7 @@ server.auth.scheme("jwt", function(server, options) {
 });
 
 
-server.auth.strategy("token", "jwt", false, {secret : config.get("jwtSecret"), algorithm :config.get("jwtAlgorithm")});
+server.auth.strategy("token", "jwt", false, {secret : config.get("jwt:secret"), algorithm :config.get("jwt:algorithm")});
 
 
 //route configuration

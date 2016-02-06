@@ -5,6 +5,8 @@ var Joi = require("joi");
 
 var config = require(path.join(__dirname, "../config/config"));
 
+var user = require(path.join(__dirname, "../models/user"));
+
 var routes = [{
 	method : "POST",
 	path : "/authenticate",
@@ -12,16 +14,24 @@ var routes = [{
 		var username = request.payload.username;
 		var password = request.payload.password;
 
-		if(username === "anandm" && password === "anandm") {
-			var secret = config.get("jwtSecret");
-			var algo = config.get("jwtAlgorithm");
-			jwt.sign({ username: username }, secret, { algorithm:  algo}, function(token) {
-					reply({"token" : token});
-			});
+		user.verifyPassword(username, password, function(err, verified) {
+			if(err) {
+				console.log(err);
+				return reply(err);
+			}
 
-		} else {
-			reply(Boom.unauthorized("wrong credentials"));
-		}
+			if(verified) {
+				var secret = config.get("jwt:secret");
+				var algo = config.get("jwt:algorithm");
+
+				jwt.sign({ username: username }, secret, { algorithm:  algo}, function(token) {
+					return reply({"token" : token});
+				});
+
+			} else {
+				return reply(Boom.unauthorized("wrong credentials"));
+			}
+		});
 	},
 	config : {
 		auth : false,

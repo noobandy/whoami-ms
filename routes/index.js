@@ -1,4 +1,4 @@
-module.exports = [{
+var routes = [{
 	method : "GET",
 	path : "/",
 	handler : function(request, reply) {
@@ -10,3 +10,5 @@ module.exports = [{
 		auth : "token"
 	}
 }];
+
+module.exports = routes;
