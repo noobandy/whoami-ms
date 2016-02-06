@@ -2,7 +2,9 @@ module.exports = [{
 	method : "GET",
 	path : "/",
 	handler : function(request, reply) {
-		reply.view("index", {"title": "Template App", message : "Hello'World!!!"});
+		var username = request.auth.credentials;
+
+		reply.view("index", {"title": "Template App", message : "Hello "+username});
 	},
 	config : {
 		auth : "token"

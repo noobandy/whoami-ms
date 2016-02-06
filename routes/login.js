@@ -15,7 +15,6 @@ var routes = [{
 			var secret = config.get("jwtSecret");
 			var algo = config.get("jwtAlgorithm");
 			jwt.sign({ username: username }, secret, { algorithm:  algo}, function(token) {
-					console.log(token);
 					reply({"token" : token});
 			});
 

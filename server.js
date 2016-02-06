@@ -28,7 +28,7 @@ server.auth.scheme("jwt", function(server, options) {
                     if(err) {
                         return reply(Boom.unauthorized("Wrong token", "jwt", {}),{});
                     }
-                    reply.continue({credentials : decoded.username});
+                    reply.continue({credentials: decoded.username});
             });
             }
         }
