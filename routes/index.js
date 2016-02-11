@@ -1,14 +1,23 @@
-var routes = [{
-	method : "GET",
-	path : "/",
-	handler : function(request, reply) {
-		var username = request.auth.credentials;
+"use strict";
 
-		reply.view("index", {"title": "Template App", message : "Hello "+username});
-	},
-	config : {
-		auth : "token"
-	}
-}];
+const internals = {};
 
-module.exports = routes;
+
+exports.register = function(server, options, next) {
+
+	server.route({
+		method : "GET",
+		path : "/",
+		config : {
+			auth : "jwt",
+			handler : function(request, reply) {
+				let username = request.auth.credentials;
+				reply.view("index", {"title": "Template App", message : "Hello "+username});
+			}
+		}
+	});
+};
+
+exports.register.attributes = {
+	name : "index-route"
+}

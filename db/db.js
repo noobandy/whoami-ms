@@ -1,35 +1,31 @@
-var path = require("path");
-var mongodb = require("mongodb");
+"use strict";
 
-var config = require(path.join(__dirname, "../config/config"));
+const MongoDB = require("mongodb");
 
-var MongoClient = mongodb.MongoClient;
-
-var dbObj = null;
- 
-module.exports = {
-	getDB : function(cb) {
-		if(!dbObj) {
-			
-			MongoClient.connect(config.get("mongo:url"), function(err, db) {
-				if(err) {
-					console.log(err);
-					return cb(err);
-				}
-
-				console.log("mongo connection created");
-
-				dbObj = db;
-				process.on("SIGINT", function() {
-					dbObj.close();
-					console.log("mongo connection closed");
-				});
-
-				return cb(null, dbObj);
-			});
-		} else {
-			return cb(null, dbObj);
-		}
-	}
+const internals = {
+	connection : null,
+	MongoClient : MongoDB.MongoClient
 };
+
+internals.init = function(url, options, callback) {
+	if(internals.connection) {
+		return callback(null, internals.connection);
+	} else {
+		internals.MongoClient.connect(url, function(err, database) {
+			
+			if(err) {
+				return callback(err);
+			}
+
+			internals.connection = database;
+
+			return callback(null, database);
+		});
+	}
+	
+};
+
+module.exports.init = internals.init;
+
+module.exports.connection = internals.connection;
 
