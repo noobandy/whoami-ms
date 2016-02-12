@@ -1,0 +1,28 @@
+{
+  "name": "Blogger",
+  "version": "0.0.0",
+  "homepage": "https://github.com/noobandy/node-template-project",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "angular": "~1.4.8",
+    "ui-router": "~0.2.15",
+    "angular-bootstrap": "~0.14.3",
+    "font-awesome": "~4.5.0",
+    "angular-resource": "~1.4.8",
+    "angular-local-storage": "~0.2.3",
+    "angular-translate": "~2.8.1",
+    "angular-translate-loader-static-files": "~2.8.1",
+    "angular-loading-bar": "~0.8.0",
+    "bootstrap-treeview": "~1.2.0",
+    "angular-base64": "~2.0.5"
+  }
+}

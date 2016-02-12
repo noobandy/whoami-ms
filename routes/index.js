@@ -1,23 +1,24 @@
 "use strict";
+var internals = {};
 
-const internals = {};
-
+internals.after = function(server, next) {
+    server.register({
+        register : require("hapi-router"),
+        options : {
+            routes : "routes/*Routes.js"
+        }
+    }, function(err) {
+        console.log("routes registered");
+        next(err);
+    });
+};
 
 exports.register = function(server, options, next) {
 
-	server.route({
-		method : "GET",
-		path : "/",
-		config : {
-			auth : "jwt",
-			handler : function(request, reply) {
-				let username = request.auth.credentials;
-				reply.view("index", {"title": "Template App", message : "Hello "+username});
-			}
-		}
-	});
+    server.dependency(["vision","inert"], internals.after);
+    next();
 };
 
 exports.register.attributes = {
-	name : "index-route"
-}
+    name : "app-routes"
+};

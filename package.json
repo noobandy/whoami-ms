@@ -12,10 +12,10 @@
   "dependencies": {
     "handlebars": "^4.0.5",
     "hapi": "^13.0.0",
-    "hapi-auth-jwt2": "^5.4.1",
+    "hapi-router": "^3.4.0",
     "inert": "^3.2.0",
     "jsonwebtoken": "^5.5.4",
-    "mongodb": "^2.1.6",
+    "mongoose": "^4.4.3",
     "nconf": "^0.8.4",
     "vision": "^4.0.1"
   },

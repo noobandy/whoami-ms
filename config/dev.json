@@ -1,13 +1,13 @@
 {
 	"server" : {
 		"host" : "localhost",
-		"port" : 5000
+		"port" : 3000
 	},
 	"jwt" : {
 		"secret" : "joinme260",
 		"algorithm" : "HS256"
 	},
-	"mongo" : {
+	"db" : {
 		"url" : "mongodb://localhost:27017/template_project",
 		"username" : "",
 		"password" : "",
