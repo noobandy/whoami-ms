@@ -1,0 +1,12 @@
+/**
+ * Created by anandm at ${DATE}
+ */
+var mongoose = require("mongoose");
+
+var ${NAME}Schema = mongoose.Schema({
+
+}, {strict : false});
+
+var ${NAME} = mongoose.model("${NAME}", ${NAME}Schema);
+
+module.exports = ${NAME};
