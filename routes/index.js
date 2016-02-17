@@ -8,7 +8,6 @@ internals.after = function(server, next) {
             routes : "routes/*Routes.js"
         }
     }, function(err) {
-        console.log("routes registered");
         next(err);
     });
 };

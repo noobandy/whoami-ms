@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <title>
+
+    </title>
+    <link rel="stylesheet" href="/public/admin/stylesheets/bootstrap-paper.min.css"/>
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css"/>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="/bower_components/ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-translate/angular-translate.js"></script>
+    <script type="text/javascript"
+            src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-base64/angular-base64.js"></script>
+
+    <!--Page includes -->
+    <link rel="stylesheet" href="/public/admin/stylesheets/style.css"/>
+    <script type="text/javascript" src="/public/admin/javascripts/app.js"></script>
+    <script type="text/javascript" src="/public/admin/javascripts/states.js"></script>
+    <script type="text/javascript" src="/public/admin/javascripts/controllers.js"></script>
+    <script type="text/javascript" src="/public/admin/javascripts/services.js"></script>
+    <script type="text/javascript" src="/public/admin/javascripts/factories.js"></script>
+    <script type="text/javascript" src="/public/admin/javascripts/directives.js"></script>
+    <script type="text/javascript" src="/public/admin/javascripts/interceptors.js"></script>
+
+</head>
+<body>
+
+
+<div data-ng-app="App">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="NavbarController">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only"/> Toggle navigation
+                    <span class="icon-bar"/>
+                    <span class="icon-bar"/>
+                    <span class="icon-bar"/>
+                </button>
+
+                <a data-ng-if="!authenticatedUser" class="navbar-brand" data-ui-sref="home"
+                   data-translate="App.appName"></a>
+                <a data-ng-if="authenticatedUser" class="navbar-brand" data-ui-sref="auth success"
+                   data-translate="App.appName"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a data-ui-sref="about" data-translate="App.about"></a>
+                    </li>
+                    <li>
+                        <a data-ui-sref="contact" data-translate="App.contact"></a>
+                    </li>
+                </ul>
+                <ul data-ng-if="authenticatedUser" class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" data-ng-bind="authenticatedUser"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-ng-click="logout()" data-translate="App.logout"></a>
+                            </li>
+
+                            <li>
+                                <a data-ui-sref="change password" data-translate="App.changePassword"></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <form data-ng-if="!authenticatedUser" class="navbar-form navbar-right" novalidate="true"
+                      name="loginForm">
+
+                    <div class="input-group"
+                         data-ng-class="{'has-error' : (loginForm.$submitted || loginForm.username.$touched) && (loginForm.username.$error.required || loginModel.wrongCredentials)}">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <input required="true" type="text" class="form-control" name="username"
+                               data-ng-model="loginModel.username" placeholder="{{'App.username' | translate}}"/>
+                    </div>
+
+                    <div class="input-group"
+                         data-ng-class="{'has-error' : (loginForm.$submitted || loginForm.password.$touched ) && (loginForm.password.$error.required || loginModel.wrongCredentials)}">
+                        <span class="input-group-addon">
+                             <i class="fa fa-lock"></i>
+                        </span>
+                        <input required="true" type="password" class="form-control" name="password"
+                               data-ng-model="loginModel.password" placeholder="{{'App.password' | translate}}"/>
+                    </div>
+
+
+                    <div class="input-group">
+                        <button type="submit" data-ng-click="loginForm.$valid && login()" class="btn btn-primary"
+                                data-translate="App.login">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container" data-ui-view="">
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted" data-translate="App.footer"></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

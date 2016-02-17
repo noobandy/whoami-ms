@@ -14,9 +14,5 @@ module.exports = {
 			loaded = true;
 		}
 		return nconf.get(key);
-	},
-
-	set : function(key, value) {
-		throw {name : "not implemented", message : "not implemented"};
 	}
 };

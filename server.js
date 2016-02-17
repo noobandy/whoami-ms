@@ -65,11 +65,11 @@ server.register(require(path.join(__dirname, "routes")), function(err) {
     Hoek.assert(!err, err);
 });
 
-
 // Start the server
 server.start(function(err) {
 
     Hoek.assert(!err, err);
-
     console.log('Server running at:', server.info.uri);
 });
+
+module.exports = server;

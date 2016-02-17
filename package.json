@@ -4,7 +4,7 @@
   "description": "template project for node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "set NODE_ENV=dev && lab -r console -o stdout -r html -o coverage.html",
     "start": "set NODE_ENV=dev && node server"
   },
   "author": "Anand Mohan",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "bower": "^1.7.7",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "lab": "^8.2.0"
   }
 }
