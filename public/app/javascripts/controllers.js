@@ -81,6 +81,11 @@ App.controller("ContactController", ["$scope",
 
 	}]);
 
+App.controller("UIController", ["$stateParams", "$scope", function($stateParams, $scope) {
+
+    $scope.activeUI = $stateParams.id;
+}]);
+
 App.controller("ForgotPasswordController", ["$scope", "User",
 	function($scope, User) {
 		$scope.username = "";

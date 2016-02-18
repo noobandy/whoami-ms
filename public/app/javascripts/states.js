@@ -31,6 +31,14 @@ angular.module("App").config(["$stateProvider", "$urlRouterProvider",
 			secure : false
 		}
 	}).state({
+		name : "ui components",
+        url : "/ui?id",
+        templateUrl : "/public/app/templates/ui.html",
+        controller : "UIController",
+        data : {
+            secure : false
+        }
+	}).state({
 		name : "forgot password",
 		url : "/forgotpassword",
 		templateUrl : "/public/app/templates/forgotpassword.html",
