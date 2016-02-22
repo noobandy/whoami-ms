@@ -15,7 +15,7 @@ var routes = [{
             ${MODEL}.find({}, function(err, docs) {
 
                 if(err) {
-                    return Boom.badImplementation(err.message);
+                    return reply(Boom.badImplementation(err));
                 }
 
                 return reply(docs);
@@ -42,7 +42,11 @@ var routes = [{
             ${MODEL}.findById(id, function(err, doc) {
 
                 if(err) {
-                    return Boom.badImplementation(err.message);
+                    return reply(Boom.badImplementation(err));
+                }
+
+                if(!doc) {
+                    return reply(Boom.notFound("Not Found"));
                 }
 
                 return reply(doc);
@@ -64,7 +68,7 @@ var routes = [{
             resource.save(function(err, doc) {
 
                 if(err) {
-                    return reply(Boom.badImplementation(err.message));
+                    return reply(Boom.badImplementation(err));
                 }
 
                 return reply(doc);
@@ -89,13 +93,13 @@ var routes = [{
             var id = request.params.id;
             var payload = request.payload;
 
-            ${MODEL}.findByIdAndUpdate(id, {$set : payload}, function(err, result) {
+            ${MODEL}.update({_id : id}, {$set : payload}, function(err, result) {
 
                 if(err) {
-                    return reply(Boom.badImplementation(err.message));
+                    return reply(Boom.badImplementation(err));
                 }
 
-                return reply(result);
+                return reply();
             });
         },
         description: "Update ${MODEL}",
@@ -115,13 +119,13 @@ var routes = [{
         handler : function(request, reply) {
             var id = request.params.id;
 
-            ${MODEL}.findByIdAndRemove(id, function(err, result) {
+            ${MODEL}.remove({_id : id}, function(err, result) {
 
                 if(err) {
-                    return reply(Boom.badImplementation(err.message));
+                    return reply(Boom.badImplementation(err));
                 }
 
-                return reply(result);
+                return reply();
             });
         },
         description: "Delete ${MODEL}",
