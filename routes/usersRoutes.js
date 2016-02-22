@@ -12,7 +12,7 @@ var routes = [{
 			payload : {
                 username : Joi.string().min(6),
                 password : Joi.string().min(6),
-                emailId : Joi.string().required()
+                emailId : Joi.string().email().required()
 			}
 		},
 		handler : function(request, reply) {

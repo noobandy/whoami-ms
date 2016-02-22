@@ -1,7 +1,7 @@
 "use strict";
 
 var App = angular.module("App", ["ngResource","ui.router", "ui.bootstrap", "LocalStorageModule",
-	"pascalprecht.translate", "angular-loading-bar", "base64"]);
+	"pascalprecht.translate", "angular-loading-bar", "base64", "ngFileUpload"]);
 
 App.constant("AppConfig", {
 	basePath : "http://localhost:3000/"
