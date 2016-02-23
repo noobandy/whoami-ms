@@ -65,6 +65,12 @@ server.register(require(path.join(__dirname, "routes")), function(err) {
     Hoek.assert(!err, err);
 });
 
+//lout documentation
+server.register(require("lout"), function (err) {
+
+    Hoek.assert(!err, err);
+});
+
 // Start the server
 server.start(function(err) {
 
