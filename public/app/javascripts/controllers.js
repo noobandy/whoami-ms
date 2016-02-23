@@ -89,6 +89,8 @@ App.controller("UIController", ["$stateParams", "$scope", "Upload", "AppConfig",
     $scope.activeUI = $stateParams.id;
 
     $scope.fileupload = {
+        uploaded : false,
+        uploadPath : null,
         file : null,
         // upload later on form submit or something similar
         submit: function () {
@@ -102,7 +104,9 @@ App.controller("UIController", ["$stateParams", "$scope", "Upload", "AppConfig",
                 url: AppConfig.basePath + 'uploads',
                 data: {file: file}
             }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + JSON.stringify(resp.data));
+                $scope.fileupload.uploaded = true;
+                $scope.fileupload.uploadPath = AppConfig.basePath + "uploads/"+resp.data._id+"/data";
             }, function (resp) {
                 console.log('Error status: ' + resp.status);
             }, function (evt) {

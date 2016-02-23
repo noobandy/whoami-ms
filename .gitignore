@@ -34,3 +34,5 @@ bower_components
 
 #ide
 .idea
+#uploaded files
+public/uploads

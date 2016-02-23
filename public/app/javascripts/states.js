@@ -33,7 +33,7 @@ angular.module("App").config(["$stateProvider", "$urlRouterProvider",
 	}).state({
 		name : "ui components",
         url : "/ui?id",
-        templateUrl : "/public/app/templates/ui.html",
+        templateUrl : "/public/app/templates/ui/ui.html",
         controller : "UIController",
         data : {
             secure : false

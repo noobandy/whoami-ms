@@ -3,7 +3,11 @@
  */
 var mongoose = require("mongoose");
 
-var UploadSchema = mongoose.Schema({}, {strict: false});
+var UploadSchema = mongoose.Schema({
+    originalFileName : {
+        type : String
+    }
+});
 
 var Upload = mongoose.model("Upload", UploadSchema);
 
