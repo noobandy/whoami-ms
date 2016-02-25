@@ -106,4 +106,24 @@ server.start(function(err) {
     console.log('Server running at:', server.info.uri);
 });
 
+
+//handle SIGINT and SIGTERM for graceful termination
+var shutdown = function() {
+    //5 second
+    console.log("stopping server");
+    server.stop({ timeout: 5 * 1000}, function(){
+        console.log("server stopped");
+        process.exit(0);
+    });
+};
+
+process.on("SIGINT", function() {
+    shutdown();
+});
+
+process.on("SIGTERM", function() {
+    shutdown();
+});
+
+
 module.exports = server;
