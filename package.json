@@ -10,6 +10,9 @@
   "author": "Anand Mohan",
   "license": "ISC",
   "dependencies": {
+    "good": "^6.6.0",
+    "good-console": "^5.3.1",
+    "good-file": "^5.1.2",
     "handlebars": "^4.0.5",
     "hapi": "^13.0.0",
     "hapi-router": "^3.4.0",

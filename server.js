@@ -71,6 +71,34 @@ server.register(require("lout"), function (err) {
     Hoek.assert(!err, err);
 });
 
+//logging
+
+var reporters = [];
+
+if(process.env == "prod") {
+    reporters.push({
+        reporter : require("good-file"),
+        events : { log : "*", request : "*" },
+        config: 'server_log'
+    });
+} else {
+    reporters.push({
+        reporter : require("good-console"),
+        events : { log : "*", request : "*" }
+    });
+}
+server.register({
+
+    register : require("good"),
+    options : {
+        opsInterval : 1000,
+        reporters : reporters
+    }
+}, function(err) {
+
+    Hoek.assert(!err, err);
+});
+
 // Start the server
 server.start(function(err) {
 
